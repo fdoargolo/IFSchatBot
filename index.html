@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Correios</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            height: 400px;
+        }
+
+        #chat-history {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 5px;
+            max-width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .user-message {
+            background-color: #e0f7fa;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #e8f5e9;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        form {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #loader {
+            display: none; /* Hide by default */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #chat-close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <span id="chat-close-button">&#x2715;</span>
+        <h1>Cora Assistente Virtual</h1>
+        <div id="chat-history"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Digite sua mensagem">
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="loader">
+            <img src="loader.gif" width="150px" alt="Loading...">
+        </div>
+    </div>
+
+    <div id="chat-button">?</div>
+
+    <script>
+        const chatButton = document.getElementById('chat-button');
+        const chatContainer = document.getElementById('chat-container');
+        const chatCloseButton = document.getElementById('chat-close-button');
+        const chatHistory = document.getElementById('chat-history');
+        const userInput = document.getElementById('user-input');
+        const form = document.getElementById('chat-form');
+
+        chatButton.addEventListener('click', () => {
+            chatContainer.style.display = 'flex'; // Show chat container
+            chatButton.style.display = 'none'; // Hide chat button
+        });
+
+        chatCloseButton.addEventListener('click', () => {
+            chatContainer.style.display = 'none'; // Hide chat container
+            chatButton.style.display = 'flex'; // Show chat button
+        });
+
+        async function sendMessage() {
+            const userMessage = userInput.value;
+            userInput.value = ''; // Clear input field
+            chatHistory.innerHTML += `<div class="message user-message">${userMessage}</div>`;
+            
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userInput: userMessage }),
+                });
+
+                const data = await response.json();
+                const botMessage = data.response;
+                chatHistory.innerHTML += `<div class="message bot-message">${botMessage}</div>`;
+                chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
+            } catch (error) {
+                console.error('Error:', error);
+                chatHistory.innerHTML += `<div class="message bot-message">Desculpe, algo deu errado. Tente novamente mais tarde.</div>`;
+                chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
+            }
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block'; // Show the loader
+            sendMessage().finally(() => {
+                loader.style.display = 'none'; // Hide the loader after the message is sent
+            });
+        });
+
+        // Adiciona a mensagem inicial do bot ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            chatHistory.innerHTML = `<div class="message bot-message">Olá, meu nome é Cora, sua assistente virtual, como posso te ajudar?</div>`;
+        });
+    </script>
+</body>
+</html>
