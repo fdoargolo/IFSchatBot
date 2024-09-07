@@ -18,7 +18,7 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background-color: #4CAF50;
+            background-color: #0033A0; /* Azul dos Correios */
             color: white;
             border-radius: 50%;
             display: flex;
@@ -26,13 +26,15 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
+            text-align: center;
         }
 
         #chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #fff;
+            background-color: #FFF; /* Branco */
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
@@ -40,12 +42,15 @@
             display: none; /* Initially hidden */
             flex-direction: column;
             height: 400px;
+            z-index: 1000;
         }
 
         #chat-header {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
+            border-bottom: 2px solid #F7E300; /* Amarelo dos Correios */
+            padding-bottom: 10px;
         }
 
         #chat-header img {
@@ -61,7 +66,7 @@
             border: 1px solid #ddd;
             padding: 10px;
             border-radius: 5px;
-            background-color: #fafafa;
+            background-color: #F7F7F7; /* Um tom de cinza claro */
             display: flex;
             flex-direction: column;
         }
@@ -76,13 +81,13 @@
         }
 
         .user-message {
-            background-color: #e0f7fa;
+            background-color: #E0F7FA; /* Azul claro */
             align-self: flex-end;
             text-align: right;
         }
 
         .bot-message {
-            background-color: #e8f5e9;
+            background-color: #E8F5E9; /* Verde claro */
             align-self: flex-start;
             text-align: left;
         }
@@ -96,12 +101,12 @@
             flex-grow: 1;
             margin-right: 10px;
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #0033A0; /* Azul dos Correios */
             border-radius: 5px;
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #F7E300; /* Amarelo dos Correios */
             color: white;
             border: none;
             padding: 10px 15px;
@@ -110,7 +115,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #F7C300; /* Amarelo mais escuro */
         }
 
         #loader {
@@ -126,6 +131,7 @@
             top: 10px;
             right: 10px;
             cursor: pointer;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -133,7 +139,7 @@
     <div id="chat-container">
         <span id="chat-close-button">&#x2715;</span>
         <div id="chat-header">
-            <img src="chatbot.jpg" >
+            <img src="chatbot.jpg" alt="Avatar do Chatbot">
             <h1>Cora Assistente Virtual</h1>
         </div>
         <div id="chat-history"></div>
@@ -200,7 +206,7 @@
             });
         });
 
-        // Add the initial image
+        // Add the initial message
         document.addEventListener('DOMContentLoaded', () => {
             chatHistory.innerHTML = `<div class="message bot-message">Olá, meu nome é Cora, sua assistente virtual, como posso te ajudar?</div>`;
         });
