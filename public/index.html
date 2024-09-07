@@ -7,26 +7,39 @@
     <style>
         body {
             font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f0f0;
             margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background-color: #fff;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
             width: 400px;
-            position: relative;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            height: 400px;
         }
 
         #chat-history {
@@ -94,10 +107,18 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        #chat-close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div id="chat-container">
+        <span id="chat-close-button">&#x2715;</span>
         <h1>Cora Assistente Virtual</h1>
         <div id="chat-history"></div>
         <form id="chat-form">
@@ -108,10 +129,26 @@
             <img src="loader.gif" width="150px" alt="Loading...">
         </div>
     </div>
+
+    <div id="chat-button">?</div>
+
     <script>
+        const chatButton = document.getElementById('chat-button');
+        const chatContainer = document.getElementById('chat-container');
+        const chatCloseButton = document.getElementById('chat-close-button');
         const chatHistory = document.getElementById('chat-history');
         const userInput = document.getElementById('user-input');
         const form = document.getElementById('chat-form');
+
+        chatButton.addEventListener('click', () => {
+            chatContainer.style.display = 'flex'; // Show chat container
+            chatButton.style.display = 'none'; // Hide chat button
+        });
+
+        chatCloseButton.addEventListener('click', () => {
+            chatContainer.style.display = 'none'; // Hide chat container
+            chatButton.style.display = 'flex'; // Show chat button
+        });
 
         async function sendMessage() {
             const userMessage = userInput.value;
