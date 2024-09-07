@@ -9,7 +9,7 @@
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            background-color: #808080; /* Fundo da página cinza */
         }
 
         #chat-button {
@@ -18,7 +18,7 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background-color: #0033A0; /* Azul dos Correios */
+            background-color: #0066cc; /* Botão azul */
             color: white;
             border-radius: 50%;
             display: flex;
@@ -26,31 +26,30 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-            font-size: 24px;
-            text-align: center;
         }
 
         #chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #FFF; /* Branco */
+            background-color: #ffcc00; /* Fundo do chat amarelo */
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
             width: 400px;
-            display: none; /* Initially hidden */
+            display: none; /* Inicialmente escondido */
             flex-direction: column;
             height: 400px;
-            z-index: 1000;
         }
 
         #chat-header {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
-            border-bottom: 2px solid #F7E300; /* Amarelo dos Correios */
-            padding-bottom: 10px;
+            background-color: #ffcc00; /* Cabeçalho cinza */
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            color: white;
         }
 
         #chat-header img {
@@ -60,13 +59,25 @@
             margin-right: 10px;
         }
 
+        #chat-header h1 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        #chat-header h2 {
+            font-size: 14px;
+            margin: 0;
+            font-weight: normal;
+        }
+
         #chat-history {
             height: 300px;
             overflow-y: scroll;
             border: 1px solid #ddd;
             padding: 10px;
-            border-radius: 5px;
-            background-color: #F7F7F7; /* Um tom de cinza claro */
+            border-radius: 0 0 5px 5px;
+            background-color: #fafafa; /* Fundo das mensagens */
             display: flex;
             flex-direction: column;
         }
@@ -81,13 +92,13 @@
         }
 
         .user-message {
-            background-color: #E0F7FA; /* Azul claro */
+            background-color: #e0f7fa;
             align-self: flex-end;
             text-align: right;
         }
 
         .bot-message {
-            background-color: #E8F5E9; /* Verde claro */
+            background-color: #e8f5e9;
             align-self: flex-start;
             text-align: left;
         }
@@ -101,12 +112,12 @@
             flex-grow: 1;
             margin-right: 10px;
             padding: 10px;
-            border: 1px solid #0033A0; /* Azul dos Correios */
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
 
         button {
-            background-color: #F7E300; /* Amarelo dos Correios */
+            background-color: #0066cc; /* Botão enviar azul */
             color: white;
             border: none;
             padding: 10px 15px;
@@ -115,11 +126,11 @@
         }
 
         button:hover {
-            background-color: #F7C300; /* Amarelo mais escuro */
+            background-color: #004d99; /* Botão enviar azul escuro */
         }
 
         #loader {
-            display: none; /* Hide by default */
+            display: none; /* Escondido por padrão */
             position: absolute;
             top: 50%;
             left: 50%;
@@ -131,7 +142,7 @@
             top: 10px;
             right: 10px;
             cursor: pointer;
-            font-size: 20px;
+            color: white;
         }
     </style>
 </head>
@@ -139,8 +150,11 @@
     <div id="chat-container">
         <span id="chat-close-button">&#x2715;</span>
         <div id="chat-header">
-            <img src="chatbot.jpg" alt="Avatar do Chatbot">
-            <h1>Cora Assistente Virtual</h1>
+            <img src="chatbot.jpeg" >
+            <div>
+                <h1>Cora</h1>
+                <h2>Assistente Virtual</h2>
+            </div>
         </div>
         <div id="chat-history"></div>
         <form id="chat-form">
@@ -163,18 +177,18 @@
         const form = document.getElementById('chat-form');
 
         chatButton.addEventListener('click', () => {
-            chatContainer.style.display = 'flex'; // Show chat container
-            chatButton.style.display = 'none'; // Hide chat button
+            chatContainer.style.display = 'flex'; // Mostrar o chat
+            chatButton.style.display = 'none'; // Esconder o botão
         });
 
         chatCloseButton.addEventListener('click', () => {
-            chatContainer.style.display = 'none'; // Hide chat container
-            chatButton.style.display = 'flex'; // Show chat button
+            chatContainer.style.display = 'none'; // Esconder o chat
+            chatButton.style.display = 'flex'; // Mostrar o botão
         });
 
         async function sendMessage() {
             const userMessage = userInput.value;
-            userInput.value = ''; // Clear input field
+            userInput.value = ''; // Limpar o campo de entrada
             chatHistory.innerHTML += `<div class="message user-message">${userMessage}</div>`;
             
             try {
@@ -189,24 +203,24 @@
                 const data = await response.json();
                 const botMessage = data.response;
                 chatHistory.innerHTML += `<div class="message bot-message">${botMessage}</div>`;
-                chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
+                chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll até o final
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Erro:', error);
                 chatHistory.innerHTML += `<div class="message bot-message">Desculpe, algo deu errado. Tente novamente mais tarde.</div>`;
-                chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
+                chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll até o final
             }
         }
 
         form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault(); // Previne o envio do formulário
             const loader = document.getElementById('loader');
-            loader.style.display = 'block'; // Show the loader
+            loader.style.display = 'block'; // Mostrar o loader
             sendMessage().finally(() => {
-                loader.style.display = 'none'; // Hide the loader after the message is sent
+                loader.style.display = 'none'; // Esconder o loader após enviar
             });
         });
 
-        // Add the initial message
+        // Adiciona a mensagem inicial do bot ao carregar a página
         document.addEventListener('DOMContentLoaded', () => {
             chatHistory.innerHTML = `<div class="message bot-message">Olá, meu nome é Cora, sua assistente virtual, como posso te ajudar?</div>`;
         });
