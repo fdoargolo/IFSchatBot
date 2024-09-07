@@ -18,6 +18,12 @@ A **CORA** é um assistente virtual para auxilia os servidores dos Correios. Ela
    npm install
    ```
 
+1.1. *Instale o SDK da AI generativa*:
+
+   ```bash
+   npm install @google/generative-ai
+   ```
+
 2. **Crie o arquivo `.env`**:
    O projeto utiliza variáveis de ambiente para armazenar chaves e outras informações sensíveis. Crie um arquivo `.env` na raiz do projeto e adicione a sua chave de API da seguinte forma:
 
