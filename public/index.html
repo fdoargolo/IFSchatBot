@@ -42,6 +42,19 @@
             height: 400px;
         }
 
+        #chat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        #chat-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
         #chat-history {
             height: 300px;
             overflow-y: scroll;
@@ -119,7 +132,10 @@
 <body>
     <div id="chat-container">
         <span id="chat-close-button">&#x2715;</span>
-        <h1>Cora Assistente Virtual</h1>
+        <div id="chat-header">
+            <img src="chatbot.jpg" >
+            <h1>Cora Assistente Virtual</h1>
+        </div>
         <div id="chat-history"></div>
         <form id="chat-form">
             <input type="text" id="user-input" placeholder="Digite sua mensagem">
@@ -184,7 +200,7 @@
             });
         });
 
-        // Adiciona a mensagem inicial do bot ao carregar a página
+        // Add the initial image
         document.addEventListener('DOMContentLoaded', () => {
             chatHistory.innerHTML = `<div class="message bot-message">Olá, meu nome é Cora, sua assistente virtual, como posso te ajudar?</div>`;
         });
