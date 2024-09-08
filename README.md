@@ -4,7 +4,7 @@ Repositório da solução desenvolvida acerca do tema “Como aumentar a eficiê
 
 # Descrição
 
-A **CORA** é um assistente virtual para auxilia os servidores dos Correios. Ela possui uma interface interativa e amigável, permitindo que os atendentes façam perguntas e recebam respostas rápidas e assertivas. Desenvolvida com uma combinação de tecnologias front-end e back-end, Cora pode ser facilmente configurado para uso em diferentes plataformas. Nela, o atendente do Correios consegue ver os tópicos mais acessados e um guia de aprendizado sobre o que ela é, como nasceu e como utilizá-la.
+A **CORA** é uma assistente virtual para auxilia os servidores dos Correios. Ela possui uma interface interativa e amigável, permitindo que os atendentes façam perguntas e recebam respostas rápidas e assertivas. Desenvolvida com uma combinação de tecnologias front-end e back-end, Cora pode ser facilmente configurada para uso em diferentes plataformas. Nela, o atendente do Correios consegue ver os tópicos mais acessados e um guia de aprendizado sobre o que ela é, como nasceu e como utilizá-la.
 Nossa plataforma é focada em trazer simplicidade e inovação por meio de um sistema claro e facilmente configurável para os desenvolvedores, além de ser portável em computadores mais simples, como os que normalmente são colocados em setores de atendimento ao público.
 
 # Sobre a aplicação
