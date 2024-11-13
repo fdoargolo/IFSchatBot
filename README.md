@@ -1,15 +1,4 @@
-# Assistente Virtual para o Hackathon Correios
 
-Repositório da solução desenvolvida acerca do tema “Como aumentar a eficiência dos atendimentos diários nas agências dos Correios por meio da tecnologia?”
-
-# Descrição
-
-A **CORA** é uma assistente virtual para auxilia os servidores dos Correios. Ela possui uma interface interativa e amigável, permitindo que os atendentes façam perguntas e recebam respostas rápidas e assertivas. Desenvolvida com uma combinação de tecnologias front-end e back-end, Cora pode ser facilmente configurada para uso em diferentes plataformas. Nela, o atendente do Correios consegue ver os tópicos mais acessados e um guia de aprendizado sobre o que ela é, como nasceu e como utilizá-la.
-Nossa plataforma é focada em trazer simplicidade e inovação por meio de um sistema claro e facilmente configurável para os desenvolvedores, além de ser portável em computadores mais simples, como os que normalmente são colocados em setores de atendimento ao público.
-
-# Sobre a aplicação
-
-Nossa proposta foi desenvolvida utilizando HTML, CSS E JavaScript para a interfaçe frontend. Cora consegue aprender em tempo real por meio de uma API integrada ao Google, fazendo com que ela possa sempre entregar respostas mais assertivas e enxutas.
 
 # Requisitos
 
@@ -51,14 +40,8 @@ npm install @google/generative-ai
 
 # Uso
 
-Uma vez que o servidor esteja rodando, a interface do chatbot estará disponível. Você verá um botão de chat na parte inferior da tela, ao clicar nele, a assistente virtual "Cora" será exibido. A partir daí, você pode digitar suas perguntas e receber respostas automatizadas.
+Uma vez que o servidor esteja rodando, a interface do chatbot estará disponível. Você verá um botão de chat na parte inferior da tela, ao clicar nele, a assistente virtual será exibido. A partir daí, você pode digitar suas perguntas e receber respostas automatizadas.
 Caso o atendente seja mais idoso ou com problemas de baixa visão, contornamos esses problemas pensando em linhas de texto maiores, trazendo comodidade para os servidores de 0 a 100 anos!
-
-# Exemplos de perguntas que você pode fazer ao bot:
-
-- "Quais as burocracias para enviar um documento para o exterior?"
-- "Como cadastrar um cliente em um curso da UniVirtual - Correios?"
-- "Me ensine a vender Seguros para os clientes"
 
 ## Estrutura do Projeto
 
